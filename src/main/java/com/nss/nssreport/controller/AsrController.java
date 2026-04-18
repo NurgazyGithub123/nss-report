@@ -145,7 +145,7 @@ public class AsrController {
             session.disconnect();
 
             // Агрегируем все дни в asr_daily
-            dailyService.aggregateAll();
+            //dailyService.aggregateAll();
 
             return ResponseEntity.ok("✅ Папок: " + dirs.size() +
                     ", файлов: " + totalFiles +

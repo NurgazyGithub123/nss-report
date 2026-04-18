@@ -16,4 +16,8 @@ public interface AsrDailyRepository extends JpaRepository<AsrDailyEntity, Long> 
     @Modifying
     @Transactional
     void deleteByDate(LocalDate date);
+
+    // Удалить все записи
+    void deleteAllBy();
+
 }

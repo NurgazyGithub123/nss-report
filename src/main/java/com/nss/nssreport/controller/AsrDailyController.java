@@ -43,4 +43,11 @@ public class AsrDailyController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return ResponseEntity.ok(dailyRepository.findByDate(date));
     }
+
+    // DELETE http://localhost:8080/api/asr-daily/all
+    @DeleteMapping("/all")
+    public ResponseEntity<String> deleteAll() {
+        dailyService.deleteAll();
+        return ResponseEntity.ok("✅ Все записи asr_daily удалены!");
+    }
 }

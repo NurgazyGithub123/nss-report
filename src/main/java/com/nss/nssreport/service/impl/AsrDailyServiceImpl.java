@@ -54,4 +54,10 @@ public class AsrDailyServiceImpl implements AsrDailyService {
                 .sorted()
                 .forEach(this::aggregateAndSave);
     }
+
+    @Transactional
+    @Override
+    public void deleteAll() {
+        dailyRepository.deleteAll();
+    }
 }
