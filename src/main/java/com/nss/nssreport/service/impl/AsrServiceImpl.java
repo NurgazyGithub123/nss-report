@@ -7,6 +7,7 @@ import com.nss.nssreport.domain.entity.AsrEntity;
 import com.nss.nssreport.domain.mapper.AsrMapper;
 import com.nss.nssreport.repository.AsrRepository;
 import com.nss.nssreport.service.AsrService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Service;
@@ -111,6 +112,24 @@ public class AsrServiceImpl implements AsrService {
                         ((Number) row[6]).longValue()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
+    }
+
+    @Transactional
+    @Override
+    public void deleteByDate(LocalDate date) {
+        repository.deleteByDate(date);
+    }
+
+    @Transactional
+    @Override
+    public void deleteByObjectInstance(String objectInstance) {
+        repository.deleteByObjectInstance(objectInstance);
     }
 
 }

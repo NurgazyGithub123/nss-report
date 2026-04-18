@@ -37,4 +37,13 @@ public interface AsrService {
 
     // Средние показатели за диапазон дат
     List<DailyAvgDto> getDailyAvgByDateBetween(LocalDate from, LocalDate to);
+
+    // Удалить все записи
+    void deleteAll();
+
+    // Удалить по дате
+    void deleteByDate(LocalDate date);
+
+    // Удалить по маршруту
+    void deleteByObjectInstance(String objectInstance);
 }

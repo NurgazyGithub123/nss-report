@@ -31,6 +31,15 @@ public interface AsrRepository extends JpaRepository<AsrEntity, Long>{
     List<AsrEntity> findByDateBetweenAndObjectInstance(
             LocalDate from, LocalDate to, String objectInstance);
 
+    // Удалить по дате
+    void deleteByDate(LocalDate date);
+
+    // Удалить по маршруту
+    void deleteByObjectInstance(String objectInstance);
+
+    // Удалить по дате и маршруту
+    void deleteByDateAndObjectInstance(LocalDate date, String objectInstance);
+
     // Агрегация по дате
     @Query("SELECT a.date, a.objectInstance, " +
             "CASE WHEN SUM(a.callAttempt) > 0 THEN SUM(a.answerTimes) * 100.0 / SUM(a.callAttempt) ELSE 0 END, " +

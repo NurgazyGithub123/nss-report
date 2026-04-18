@@ -6,6 +6,7 @@ import com.nss.nssreport.repository.AsrRepository;
 import com.nss.nssreport.service.AsrDailyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,8 +19,8 @@ public class AsrDailyServiceImpl implements AsrDailyService {
     private final AsrDailyRepository dailyRepository;
 
     @Override
+    @Transactional
     public void aggregateAndSave(LocalDate date) {
-        // Удаляем старые данные за этот день если есть
         dailyRepository.deleteByDate(date);
 
         List<Object[]> rows = asrRepository.findDailyAvgByDate(date);
@@ -44,8 +45,8 @@ public class AsrDailyServiceImpl implements AsrDailyService {
     }
 
     @Override
+    @Transactional
     public void aggregateAll() {
-        // Берём все уникальные даты из asr_kpi и агрегируем каждую
         asrRepository.findAll().stream()
                 .map(e -> e.getDate())
                 .filter(d -> d != null)

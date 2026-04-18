@@ -204,4 +204,27 @@ public class AsrController {
         }
         return ResponseEntity.badRequest().build();
     }
+
+    // DELETE http://localhost:8080/api/asr/all
+    @DeleteMapping("/all")
+    public ResponseEntity<String> deleteAll() {
+        asrService.deleteAll();
+        return ResponseEntity.ok("✅ Все записи удалены!");
+    }
+
+    // DELETE http://localhost:8080/api/asr/date?date=2026-01-20
+    @DeleteMapping("/date")
+    public ResponseEntity<String> deleteByDate(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        asrService.deleteByDate(date);
+        return ResponseEntity.ok("✅ Записи за " + date + " удалены!");
+    }
+
+    // DELETE http://localhost:8080/api/asr/route?route=CHINA(8),CHINA(8)
+    @DeleteMapping("/route")
+    public ResponseEntity<String> deleteByRoute(
+            @RequestParam String route) {
+        asrService.deleteByObjectInstance(route);
+        return ResponseEntity.ok("✅ Записи маршрута " + route + " удалены!");
+    }
 }
